@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ExamDatabase" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="AnswerVariants" EntityType="ExamModel.AnswerVariants" />
+    <EntitySet Name="Questions" EntityType="ExamModel.Questions" />
+    <EntitySet Name="TestsInfo" EntityType="ExamModel.TestsInfo" />
+    <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="ExamModel.FK__AnswerWar__TestI__59063A47">
+      <End Role="TestsInfo" EntitySet="TestsInfo" />
+      <End Role="AnswerVariants" EntitySet="AnswerVariants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questions__TestI__5165187F" Association="ExamModel.FK__Questions__TestI__5165187F">
+      <End Role="TestsInfo" EntitySet="TestsInfo" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AnswerVariants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Variant" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsAnswer" Type="Boolean" Nullable="false" />
+    <Property Name="TestId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TestsInfo" Relationship="ExamModel.FK__AnswerWar__TestI__59063A47" FromRole="AnswerVariants" ToRole="TestsInfo" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TestId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TestsInfo" Relationship="ExamModel.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
+  </EntityType>
+  <EntityType Name="TestsInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Attempts" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AnswerVariants" Relationship="ExamModel.FK__AnswerWar__TestI__59063A47" FromRole="TestsInfo" ToRole="AnswerVariants" />
+    <NavigationProperty Name="Questions" Relationship="ExamModel.FK__Questions__TestI__5165187F" FromRole="TestsInfo" ToRole="Questions" />
+  </EntityType>
+  <Association Name="FK__AnswerWar__TestI__59063A47">
+    <End Type="ExamModel.TestsInfo" Role="TestsInfo" Multiplicity="1" />
+    <End Type="ExamModel.AnswerVariants" Role="AnswerVariants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AnswerVariants">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questions__TestI__5165187F">
+    <End Type="ExamModel.TestsInfo" Role="TestsInfo" Multiplicity="1" />
+    <End Type="ExamModel.Questions" Role="Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

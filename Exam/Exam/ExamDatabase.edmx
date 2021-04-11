@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerVariants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Variant" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAnswer" Type="bit" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestsInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attempts" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AnswerWar__TestI__59063A47">
+          <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+          <End Role="AnswerVariants" Type="Self.AnswerVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerVariants">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__TestI__5165187F">
+          <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExamModelStoreContainer">
+          <EntitySet Name="AnswerVariants" EntityType="Self.AnswerVariants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestsInfo" EntityType="Self.TestsInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="Self.FK__AnswerWar__TestI__59063A47">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="AnswerVariants" EntitySet="AnswerVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__TestI__5165187F" Association="Self.FK__Questions__TestI__5165187F">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ExamDatabase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="AnswerVariants" EntityType="ExamModel.AnswerVariants" />
+          <EntitySet Name="Questions" EntityType="ExamModel.Questions" />
+          <EntitySet Name="TestsInfo" EntityType="ExamModel.TestsInfo" />
+          <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="ExamModel.FK__AnswerWar__TestI__59063A47">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="AnswerVariants" EntitySet="AnswerVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Questions__TestI__5165187F" Association="ExamModel.FK__Questions__TestI__5165187F">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AnswerVariants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Variant" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsAnswer" Type="Boolean" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestsInfo" Relationship="ExamModel.FK__AnswerWar__TestI__59063A47" FromRole="AnswerVariants" ToRole="TestsInfo" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestsInfo" Relationship="ExamModel.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
+        </EntityType>
+        <EntityType Name="TestsInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attempts" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnswerVariants" Relationship="ExamModel.FK__AnswerWar__TestI__59063A47" FromRole="TestsInfo" ToRole="AnswerVariants" />
+          <NavigationProperty Name="Questions" Relationship="ExamModel.FK__Questions__TestI__5165187F" FromRole="TestsInfo" ToRole="Questions" />
+        </EntityType>
+        <Association Name="FK__AnswerWar__TestI__59063A47">
+          <End Type="ExamModel.TestsInfo" Role="TestsInfo" Multiplicity="1" />
+          <End Type="ExamModel.AnswerVariants" Role="AnswerVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnswerVariants">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Questions__TestI__5165187F">
+          <End Type="ExamModel.TestsInfo" Role="TestsInfo" Multiplicity="1" />
+          <End Type="ExamModel.Questions" Role="Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExamModelStoreContainer" CdmEntityContainer="ExamDatabase">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ExamModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnswerVariants">
+            <EntityTypeMapping TypeName="ExamModel.AnswerVariants">
+              <MappingFragment StoreEntitySet="AnswerVariants">
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="IsAnswer" ColumnName="IsAnswer" />
+                <ScalarProperty Name="Variant" ColumnName="Variant" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="ExamModel.Questions">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestsInfo">
+            <EntityTypeMapping TypeName="ExamModel.TestsInfo">
+              <MappingFragment StoreEntitySet="TestsInfo">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Attempts" ColumnName="Attempts" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
