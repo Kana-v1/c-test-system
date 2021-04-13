@@ -19,6 +19,9 @@
                 <ResourceDictionary Source="/Themes/CheckBoxTheme.xaml"/>
                 <ResourceDictionary Source="/Themes/NewQustionTheme.xaml"/>
                 <ResourceDictionary Source="/Themes/PictureBtnTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/TestNameTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/WeightBtnTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/EmptyTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:NewTestModelClass}">

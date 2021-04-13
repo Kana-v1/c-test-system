@@ -14,6 +14,7 @@
     <EntitySetMapping Name="Questions">
       <EntityTypeMapping TypeName="ExamModel.Questions">
         <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Question" ColumnName="Question" />
           <ScalarProperty Name="TestId" ColumnName="TestId" />

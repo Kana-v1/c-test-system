@@ -19,6 +19,7 @@
     <Property Name="TestId" Type="Int32" Nullable="false" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="TestsInfo" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
+    <Property Name="Weight" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TestsInfo">
     <Key>

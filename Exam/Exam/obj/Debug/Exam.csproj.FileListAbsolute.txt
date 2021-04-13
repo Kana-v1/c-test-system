@@ -71,3 +71,5 @@ C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\MVVM\ModelView\PassTestVie
 C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\MVVM\ModelView\PassTestView.baml
 C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\Themes\NewQustionTheme.baml
 C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\Themes\PictureBtnTheme.baml
+C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\Themes\WeightBtnTheme.baml
+C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\Themes\EmptyTextBox.baml

@@ -30,7 +30,20 @@ namespace Exam.MVVM.ModelView
 
 
         private void Button_Click(object sender, RoutedEventArgs e)//new test
-        {            
+        {
+            using (ExamDatabase ed = new ExamDatabase())
+            {
+                if (ed.TestsInfo.Where(x => x.Title == TestNameTb.Text).FirstOrDefault() != null)
+            {
+                MessageBox.Show("Test's title have to be unique", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (String.IsNullOrEmpty(TestNameTb.Text))
+            {
+                MessageBox.Show("Test's title must not be empty", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
 
             if (!Int32.TryParse(TestAttempts.Text, out _attempts) || _attempts <= 0 || _attempts > 100)
             {
@@ -48,8 +61,7 @@ namespace Exam.MVVM.ModelView
             OneQOneAns.Visibility = Visibility.Visible;
             OneQRb.Visibility = Visibility.Visible;
 
-            using (ExamDatabase ed = new ExamDatabase())
-            {
+            
                 TestsInfo ti = new TestsInfo() { Title = _testTitle, Attempts = _attempts };
                 ed.TestsInfo.Add(ti);
                 ed.SaveChanges();
@@ -119,12 +131,27 @@ namespace Exam.MVVM.ModelView
         {
             using (ExamDatabase ed = new ExamDatabase())
             {
-                if (OneQOneAns.IsChecked == true && !OnlyOneCheckedInCheckBox())
+               
+
+                int weight = 0;
+
+                if (!Int32.TryParse(QuestionWeightTb.Text, out weight))
                 {
-                    MessageBox.Show("2 answers have chosen as right. If you think its OK - chose \"One question → many answers\" mode", "too many answers", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Enter question's weight", "Incorrect question's weight", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
+                //REGION
+                #region Question field check
+               
+                if (String.IsNullOrEmpty(QuestionTb.Text))
+                {
+                    MessageBox.Show("Question's field must not be empty", "Incorrect question's field", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                #endregion
+
+                _question.Weight = weight;
                 _question.Question = QuestionTb.Text;
                 _question.TestId = _newTestId;
 
@@ -132,9 +159,11 @@ namespace Exam.MVVM.ModelView
 
                 List<AnswerVariants> avList = new List<AnswerVariants>();
 
-
+                int answersCount = 0;
                 foreach (var tb in StackPanelWithCB.Children.OfType<CheckBox>().Where(x => !String.IsNullOrEmpty(x.Content.ToString())))
                 {
+                    answersCount++;
+
                     avList.Add(new AnswerVariants()
                     {
                         Variant = tb.Content.ToString(),
@@ -143,6 +172,18 @@ namespace Exam.MVVM.ModelView
                     });
                 }
 
+                //REGION
+                #region Variants check
+                if (answersCount == 0)
+                {
+                    MessageBox.Show("Enter at least 1 answer", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (OneQOneAns.IsChecked == true && !OnlyOneCheckedInCheckBox())
+                {
+                    MessageBox.Show("2 answers have chosen as right. If you think its OK - chose \"One question → many answers\" mode", "too many answers", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
                 for (int i = 0; i < avList.Count - 1; i++)
                 {
                     for (int j = i + 1; j < avList.Count; j++)
@@ -151,13 +192,39 @@ namespace Exam.MVVM.ModelView
                             MessageBox.Show($"U can't have two similar answers ({avList[i].Variant}", "Two similar answers", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                #endregion
 
                 foreach (var answers in avList)
                 {
                     ed.AnswerVariants.Add(answers);
                 }
                 ed.SaveChanges();
+
+                MakeAllFieldsEmpty();
             }
+        }
+
+        private void MakeAllFieldsEmpty()
+        {
+            foreach (var tb in StackPanelWithTb.Children.OfType<TextBox>())
+            {
+                tb.Text = String.Empty;
+            }
+
+            imageForQuestion.Source = null;
+            QuestionTb.Text = String.Empty;
+            QuestionWeightTb.Text = String.Empty;
+
+            foreach (var rb in SPWithRb.Children.OfType<RadioButton>())
+            {
+                rb.IsChecked = false;
+            }
+
+            foreach (var tb in StackPanelWithCB.Children.OfType<CheckBox>())
+            {
+                tb.IsChecked = false;
+            }
+
         }
 
         private bool OnlyOneCheckedInCheckBox()
@@ -173,6 +240,14 @@ namespace Exam.MVVM.ModelView
                 return false;
 
             return true;
+        }
+
+        private void FinishCreatingTestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StartMenu instance = Application.Current.Windows.OfType<StartMenu>().FirstOrDefault();
+            StartMenu new_instance = new StartMenu();
+            new_instance.Show();
+            instance.Close();
         }
     }
 }

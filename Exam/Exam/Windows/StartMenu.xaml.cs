@@ -45,12 +45,12 @@ namespace Exam
             
         }
 
-        //public void NewTestRb_Checked (object sender, RoutedEventArgs e)
+        //public void NewTestRb_Checked(object sender, RoutedEventArgs e)
         //{
         //    OneQRb.Visibility = Visibility.Visible;
         //    ManyQRb.Visibility = Visibility.Visible;
 
-           
+
         //}
 
         public void LogOut_Checked(object sender, RoutedEventArgs e)

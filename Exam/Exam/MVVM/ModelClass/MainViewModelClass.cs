@@ -32,7 +32,8 @@ namespace Exam.MVVM.ModelClass
             NewTestVM = new NewTestModelClass();
             PassTestVM = new PassTestViewModelClass();
 
-            CurrentView = NewTestVM;
+            CurrentView = PassTestVM;
+
             NewTestCommand = new RelayCommand (o => { CurrentView = NewTestVM; });
 
             PassTestCommand = new RelayCommand(o => { CurrentView = PassTestVM; });

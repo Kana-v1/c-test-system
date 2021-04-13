@@ -14,7 +14,8 @@
         </Grid.RowDefinitions>
 
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal"
+                    Name ="SPWithRb">
             <RadioButton Content="One question → one answer"
                              Height="100"
                              Foreground="White"
@@ -82,18 +83,26 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <TextBox
-                    Width="700"
+            <StackPanel Orientation="Horizontal">
+                <TextBox
+                    Width="400"
                          Height="40"
                          VerticalAlignment="Center"
                          AcceptsReturn="True"
-                         HorizontalAlignment="Center"
+                         HorizontalAlignment="Left"
                         VerticalScrollBarVisibility="Visible"
                          Margin="5"
                          Name ="QuestionTb"                         
-                      
                          Style="{StaticResource QuestionTheme}"/>
+
+                <TextBox Width="192"
+                         Height="100"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Margin="40,-20,0,-20"
+                         x:Name="QuestionWeightTb"
+                         Style="{StaticResource WeightBtnTheme}"/>
+            </StackPanel>
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -210,7 +219,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="243,0,0,0">
-                                      
+
                     <Button Height="100"
                                 Margin="0, 25, 0,0"
                                 FontSize="14"
@@ -218,10 +227,10 @@
                                 Content="Picture for question"
                                 x:Name="PictureBtn" 
                             Click="AddPictureBtn_Click"/>
-                    
+
                     <Image x:Name="imageForQuestion"
                            Height="100"/>
-                    
+
                     <Button Height="40"
                                 Content="Add question"
                                 Margin="0, 50, 0, 0" 
@@ -234,9 +243,10 @@
                     <Button  Height="40"
                                 Content="Finish creating test"
                                 Margin="0, 50, 0, 0" 
-                             Style="{StaticResource NewQuestionTheme}"
+                             x:Name="FinishCreatingTestBtn"
+                             Style="{StaticResource NewQuestionTheme}" Click="FinishCreatingTestBtn_Click" 
                            />
-                    
+
                 </StackPanel>
             </Grid>
         </Grid>

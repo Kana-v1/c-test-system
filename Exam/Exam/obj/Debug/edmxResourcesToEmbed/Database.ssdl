@@ -17,6 +17,7 @@
     <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TestId" Type="int" Nullable="false" />
     <Property Name="Image" Type="image" />
+    <Property Name="Weight" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TestsInfo">
     <Key>

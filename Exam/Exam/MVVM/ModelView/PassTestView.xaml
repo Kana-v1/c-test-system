@@ -6,8 +6,126 @@
              xmlns:local="clr-namespace:Exam.MVVM.ModelView"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="Orange">
+             >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+
+
+        <ComboBox Width="250"
+                  HorizontalAlignment="Left"
+                  Background ="Green"
+                  Margin="10"
+                  Name ="TestsTitle" 
+                  SelectionChanged="TestsTitle_SelectionChanged"
+                  
+                  >
+            <ComboBox.ToolTip>
+                Enter test which u want to pass
+            </ComboBox.ToolTip>
+        </ComboBox>
+        
+        <TextBox x:Name="TestTitleTb"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Width="411"
+                       Background="#353440"
+                       FontSize="18"
+                       TextAlignment="Center"
+                       Foreground="White"
+                       Style="{StaticResource EmptyTextBox}" Margin="260,5,129,5"
+                       IsReadOnly="True"
+                       >
+        </TextBox>
+
+        <Button x:Name="StartTestBtn"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Content="Start test"
+                Style="{StaticResource ButtonTheme}"
+                Height="45"
+                Width="120" Click="StartTestBtn_Click"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             
+            
+            <StackPanel Name ="StackPanelWithCB">
+                <CheckBox Content=""
+                                  Height="40"
+                                 Margin="10, 30, 10, 15"
+                                 VerticalAlignment="Center"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource CheckBoxTheme}"
+                                  Name ="FirstVariantInChB"
+                                  Foreground="White"
+                                  >                  
+                </CheckBox>
+
+                <CheckBox Content=""
+                                  Height="40"
+                                 Margin="10, 30, 10, 15"
+                                 VerticalAlignment="Center"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource CheckBoxTheme}"
+                                  Name ="SecondVariantInChB"
+                                  Foreground="White">                   
+                </CheckBox>
+
+                <CheckBox Content=""
+                                  Height="40"
+                                 Margin="10, 30, 10, 15"
+                                 VerticalAlignment="Center"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource CheckBoxTheme}"
+                                  Name ="ThirdVariantInChB"
+                                  Foreground="White">                   
+                </CheckBox>
+
+                <CheckBox Content=""
+                                  Height="40"
+                                 Margin="10, 30, 10, 15"
+                                 VerticalAlignment="Center"
+                                  HorizontalAlignment="Stretch"
+                                  Style="{StaticResource CheckBoxTheme}"
+                                  Name ="FourthVariantInChB"
+                                  Foreground="White">                    
+                </CheckBox>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Height="40"
+                         VerticalAlignment="Top"
+                         Margin="10"
+                         Style="{StaticResource EmptyTextBox}"
+                         x:Name="QuestionTb"></TextBox>
+                
+                <Image x:Name="QuestionImage"
+                       Margin="10,68,10,10"/>
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <Button x:Name="FinishTestBtn"
+                            Margin="40, 5, 5, 5"
+                            Height="40"
+                            Width="140"
+                            Style="{StaticResource NewQuestionTheme}"
+                            Content="Finish test"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+
     </Grid>
 </UserControl>

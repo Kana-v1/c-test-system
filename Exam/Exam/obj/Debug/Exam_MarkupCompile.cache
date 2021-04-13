@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\NetworkProg\Exam\c-test-system\Exam\Exam\App.xaml
-15959635176
+17-2147454771
 2-748667605
 21-1790150994
 181245914363
-MainWindow.xaml;MVVM\ModelView\AddingTestWindow.xaml;MVVM\ModelView\PassTestView.xaml;Themes\AnswerVariantsTheme.xaml;Themes\ButtonTheme.xaml;Themes\CheckBoxTheme.xaml;Themes\CreatingTestTheme.xaml;Themes\FirstAnswerVariant.xaml;Themes\MainMenuTheme.xaml;Themes\MaxAttempts.xaml;Themes\NewQustionTheme.xaml;Themes\PictureBtnTheme.xaml;Themes\QuestionTheme.xaml;Themes\TestNameTheme.xaml;Windows\StartMenu.xaml;
+MainWindow.xaml;MVVM\ModelView\AddingTestWindow.xaml;MVVM\ModelView\PassTestView.xaml;Themes\AnswerVariantsTheme.xaml;Themes\ButtonTheme.xaml;Themes\CheckBoxTheme.xaml;Themes\CreatingTestTheme.xaml;Themes\EmptyTextBox.xaml;Themes\FirstAnswerVariant.xaml;Themes\MainMenuTheme.xaml;Themes\MaxAttempts.xaml;Themes\NewQustionTheme.xaml;Themes\PictureBtnTheme.xaml;Themes\QuestionTheme.xaml;Themes\TestNameTheme.xaml;Themes\WeightBtnTheme.xaml;Windows\StartMenu.xaml;
 
 False
 
