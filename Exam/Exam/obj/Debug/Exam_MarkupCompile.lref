@@ -1,8 +1,12 @@
 ﻿
-FC:\NetworkProg\Exam\Exam\Exam\App.xaml;;
-FC:\NetworkProg\Exam\Exam\Exam\MainWindow.xaml;;
-FC:\NetworkProg\Exam\Exam\Exam\Themes\ButtonTheme.xaml;;
-FC:\NetworkProg\Exam\Exam\Exam\Themes\CheckBoxTheme.xaml;;
-FC:\NetworkProg\Exam\Exam\Exam\Themes\MainMenuTheme.xaml;;
-FC:\NetworkProg\Exam\Exam\Exam\Windows\StartMenu.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\App.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\MainWindow.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\MVVM\ModelView\AddingTestWindow.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\MVVM\ModelView\PassTestView.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Themes\ButtonTheme.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Themes\CheckBoxTheme.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Themes\MainMenuTheme.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Themes\NewQustionTheme.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Themes\PictureBtnTheme.xaml;;
+FC:\NetworkProg\Exam\c-test-system\Exam\Exam\Windows\StartMenu.xaml;;
 

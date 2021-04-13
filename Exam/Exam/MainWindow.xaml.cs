@@ -1,22 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Data.Entity;
-using System.Threading;
-using System.Security.Cryptography;
-using System.Diagnostics;
 
 namespace Exam
 {
@@ -29,7 +12,7 @@ namespace Exam
         public MainWindow()
         {
             InitializeComponent();
-            AppDomain.CurrentDomain.SetData("DataDirectory", @"C:\NetworkProg\Exam");
+            AppDomain.CurrentDomain.SetData("DataDirectory", @"C:\NetworkProg\Exam\c-test-system");
 
             _ua = new UserAuthentication();
 
@@ -54,7 +37,7 @@ namespace Exam
             RegisterBtn.Click -= _ua.RegisterBtn_Click;
             LogInBtn.Click -= _ua.LogInBtn_Click;
 
-            Process.GetCurrentProcess().Kill();
+            //Process.GetCurrentProcess().Kill();
         }
 
         private void PasswordChanged(object sender, RoutedEventArgs e) //event handler for password field's watermark
@@ -67,7 +50,9 @@ namespace Exam
             {
                 PasswordTBlock.Visibility = Visibility.Visible;
             }
+            
         }
+
     }
 
 

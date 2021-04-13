@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\NetworkProg\Exam\Exam\Exam\obj\Debug\
+C:\NetworkProg\Exam\c-test-system\Exam\Exam\obj\Debug\
 Exam
 none
 false
 DEBUG;TRACE
-C:\NetworkProg\Exam\Exam\Exam\App.xaml
-112125080974
-21837279069
-17-462455223
-181044270202
-MainWindow.xaml;Themes\AnswerVariantsTheme.xaml;Themes\ButtonTheme.xaml;Themes\CheckBoxTheme.xaml;Themes\CreatingTestTheme.xaml;Themes\FirstAnswerVariant.xaml;Themes\MainMenuTheme.xaml;Themes\MaxAttempts.xaml;Themes\QuestionTheme.xaml;Themes\TestNameTheme.xaml;Windows\StartMenu.xaml;
+C:\NetworkProg\Exam\c-test-system\Exam\Exam\App.xaml
+15959635176
+21750853300
+22-1889764001
+181245914363
+MainWindow.xaml;MVVM\ModelView\AddingTestWindow.xaml;MVVM\ModelView\PassTestView.xaml;Themes\AnswerVariantsTheme.xaml;Themes\ButtonTheme.xaml;Themes\CheckBoxTheme.xaml;Themes\CreatingTestTheme.xaml;Themes\FirstAnswerVariant.xaml;Themes\MainMenuTheme.xaml;Themes\MaxAttempts.xaml;Themes\NewQustionTheme.xaml;Themes\PictureBtnTheme.xaml;Themes\QuestionTheme.xaml;Themes\TestNameTheme.xaml;Windows\StartMenu.xaml;
 
-True
+False
 

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Exam.MVVM.ModelClass"
         xmlns:local="clr-namespace:Exam"
         mc:Ignorable="d"
         Title="StartMenu" Height="600" Width="920"
@@ -10,36 +11,28 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="true">
+   
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/MainMenuTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/CreatingTestTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/TestNameTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/MaxAttempts.xaml"/>
-                <ResourceDictionary Source="/Themes/ButtonTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/QuestionTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/AnswerVariantsTheme.xaml"/>
-                <ResourceDictionary Source="/Themes/CheckBoxTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-
+    <Window.DataContext>
+        <viewModel:MainViewModelClass/>
+    </Window.DataContext>
 
     <Border Background="#272537"
             CornerRadius="30">
         <Grid>
+            
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            
             <StackPanel Grid.Row="1">
                 <RadioButton Content ="Pass test"
                              Height="50"
@@ -54,7 +47,7 @@
                               FontSize ="20"
                               Style="{StaticResource MainMenuButtonTheme}"
                              Name ="NewTestRb"
-                             Checked="NewTestRb_Checked"/>
+                            />
 
                 <RadioButton Content ="Log out"
                              Height="50"
@@ -63,11 +56,15 @@
                               Style="{StaticResource MainMenuButtonTheme}" Checked="LogOut_Checked"/>
 
             </StackPanel>
+            </Grid>
 
-            <StackPanel Grid.Column="1" 
-                        Orientation="Horizontal">
 
-                <RadioButton Content="One question → one answer"
+            <ContentControl Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+
+
+            <!--<RadioButton Content="One question → one answer"
                              Height="100"
                              Foreground="White"
                              FontSize="20"
@@ -75,9 +72,9 @@
                              VerticalAlignment="Top"
                              Visibility="Hidden"
                              Name ="ManyQRb">
-                </RadioButton>
+            </RadioButton>
 
-                <RadioButton Content="One question → many asnwer"
+            <RadioButton Content="One question → many asnwer"
                              Height="100"
                              Foreground="White"
                              FontSize="20"
@@ -87,8 +84,7 @@
                              Visibility="Hidden"
                              Name ="OneQRb"
                              >
-                </RadioButton>
-            </StackPanel>
+            </RadioButton>
 
             <Grid  Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -263,16 +259,17 @@
                         <Button 
                                 Height="40"
                                 Content="LoadQuestion"
-                                Margin="0, 50, 0, 0" Click="Button_Click_1">
+                                Margin="0, 50, 0, 0" 
+                                Click="NewQuestionBtn">
 
                         </Button>
                     </StackPanel>
                 </Grid>
 
 
-            </Grid>
+            </Grid>-->
 
-
+            
 
         </Grid>
     </Border>

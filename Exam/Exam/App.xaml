@@ -2,9 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Exam"
+             xmlns:viewModel="clr-namespace:Exam.MVVM.ModelClass"
+             xmlns:view="clr-namespace:Exam.MVVM.ModelView"
              StartupUri="MainWindow.xaml"
              ShutdownMode="OnLastWindowClose">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/MainMenuTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/CreatingTestTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/TestNameTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/MaxAttempts.xaml"/>
+                <ResourceDictionary Source="/Themes/ButtonTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/QuestionTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/AnswerVariantsTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/CheckBoxTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/NewQustionTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/PictureBtnTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:NewTestModelClass}">
+                <view:AddingTestWindow/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:PassTestViewModelClass}">
+                <view:PassTestView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

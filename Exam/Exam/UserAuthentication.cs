@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -49,7 +47,9 @@ namespace Exam
                 Password = password;
 
                 if (IsAdmin == true)
+                {
                     _userType = UserType.Administrator;
+                }
 
                 Authenticated = true;
 
@@ -69,9 +69,9 @@ namespace Exam
             byte[] bytes = Encoding.UTF8.GetBytes(checkPassword);
             string hashedPassword = Convert.ToBase64String(provider.ComputeHash(bytes));
 
-            using (ExamDatabase ud = new ExamDatabase())
+            using (TestSystemDb tsd = new TestSystemDb())
             {
-                var user = ud.Users.FirstOrDefault(l => l.Login == checkLogin);
+                var user = tsd.Users.FirstOrDefault(u => u.Login == checkLogin);
 
                 if (user != null && user.Password == hashedPassword)
                 {
@@ -80,7 +80,7 @@ namespace Exam
                 }
             }
 
-            return check;
+                return check;
         }
         #endregion
 
@@ -98,7 +98,7 @@ namespace Exam
             try
             {
                 Users user = new Users() { Login = _instance.LogTb.Text, Password = hashedPassword };
-                using (ExamDatabase ud = new ExamDatabase())
+                using (TestSystemDb ud = new TestSystemDb())
                 {
                     ud.Users.Add(user);
                     ud.SaveChanges();
