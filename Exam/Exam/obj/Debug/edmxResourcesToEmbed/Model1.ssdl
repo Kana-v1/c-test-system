@@ -16,6 +16,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="Image" Type="image" />
   </EntityType>
   <EntityType Name="TestsInfo">
     <Key>

@@ -69,7 +69,7 @@ namespace Exam
             byte[] bytes = Encoding.UTF8.GetBytes(checkPassword);
             string hashedPassword = Convert.ToBase64String(provider.ComputeHash(bytes));
 
-            using (TestSystemDb tsd = new TestSystemDb())
+            using (ExamDatabase tsd = new ExamDatabase())
             {
                 var user = tsd.Users.FirstOrDefault(u => u.Login == checkLogin);
 
@@ -98,7 +98,7 @@ namespace Exam
             try
             {
                 Users user = new Users() { Login = _instance.LogTb.Text, Password = hashedPassword };
-                using (TestSystemDb ud = new TestSystemDb())
+                using (ExamDatabase ud = new ExamDatabase())
                 {
                     ud.Users.Add(user);
                     ud.SaveChanges();

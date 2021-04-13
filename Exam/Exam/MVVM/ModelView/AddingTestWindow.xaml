@@ -22,7 +22,8 @@
                              Style="{StaticResource CreatingTestTheme}"
                              VerticalAlignment="Top"
                              Visibility="Hidden"
-                             Name ="ManyQRb">
+                             Name ="OneQOneAns"
+                             >
             </RadioButton>
             <RadioButton Content="One question → many asnwer"
                              Height="100"
@@ -214,7 +215,10 @@
                                 Margin="0, 25, 0,0"
                                 FontSize="14"
                                Style="{StaticResource PictureBtnTheme}"
-                                Content="Picture for question"/>
+                                Content="Picture for question"
+                                x:Name="PictureBtn" 
+                            Click="AddPictureBtn_Click"/>
+                    
                     <Image x:Name="imageForQuestion"
                            Height="100"/>
                     

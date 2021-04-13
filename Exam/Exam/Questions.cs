@@ -17,6 +17,7 @@ namespace Exam
         public int Id { get; set; }
         public string Question { get; set; }
         public int TestId { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual TestsInfo TestsInfo { get; set; }
     }
