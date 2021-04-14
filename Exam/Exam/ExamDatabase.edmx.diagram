@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f1be116c7577489f92b44fc82321e6f9" Name="Diagram1">
+        <EntityTypeShape EntityType="ExamModel.AnswerVariants" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamModel.Questions" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamModel.TestsInfo" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamModel.Users" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="ExamModel.FK__AnswerVar__Quest__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamModel.FK__Questions__TestI__5165187F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ExamModel.Results" Width="1.5" PointX="4.625" PointY="3.875" />
+        <AssociationConnector Association="ExamModel.FK__Results__TestId__03F0984C" />
+        <AssociationConnector Association="ExamModel.FK__Results__UserId__02FC7413" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

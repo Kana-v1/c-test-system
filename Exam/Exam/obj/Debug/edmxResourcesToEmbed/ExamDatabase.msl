@@ -1,40 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ExamModelStoreContainer" CdmEntityContainer="ExamDatabase">
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="ExamModel.Users">
-        <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Login" ColumnName="Login" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AnswerVariants">
       <EntityTypeMapping TypeName="ExamModel.AnswerVariants">
         <MappingFragment StoreEntitySet="AnswerVariants">
-          <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="IsAnswer" ColumnName="IsAnswer" />
-          <ScalarProperty Name="Variant" ColumnName="Variant" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Variant" ColumnName="Variant" />
+          <ScalarProperty Name="IsAnswer" ColumnName="IsAnswer" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Questions">
       <EntityTypeMapping TypeName="ExamModel.Questions">
         <MappingFragment StoreEntitySet="Questions">
-          <ScalarProperty Name="TestId" ColumnName="TestId" />
-          <ScalarProperty Name="Question" ColumnName="Question" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TestsInfo">
       <EntityTypeMapping TypeName="ExamModel.TestsInfo">
         <MappingFragment StoreEntitySet="TestsInfo">
-          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Attempts" ColumnName="Attempts" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ExamModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="ExamModel.Results">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="Attemptsleft" ColumnName="Attemptsleft" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

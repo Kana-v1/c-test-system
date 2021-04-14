@@ -17,8 +17,8 @@ namespace Exam
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TestsInfo()
         {
-            this.AnswerVariants = new HashSet<AnswerVariants>();
             this.Questions = new HashSet<Questions>();
+            this.Results = new HashSet<Results>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace Exam
         public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AnswerVariants> AnswerVariants { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Questions> Questions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Results> Results { get; set; }
     }
 }

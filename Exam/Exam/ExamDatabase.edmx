@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Variant" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IsAnswer" Type="bit" Nullable="false" />
-          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -23,6 +23,16 @@
           <Property Name="TestId" Type="int" Nullable="false" />
           <Property Name="Image" Type="image" />
           <Property Name="Weight" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="int" Nullable="false" />
+          <Property Name="Attemptsleft" Type="int" />
         </EntityType>
         <EntityType Name="TestsInfo">
           <Key>
@@ -41,15 +51,15 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__AnswerWar__TestI__59063A47">
-          <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+        <Association Name="FK__AnswerVar__Quest__6E01572D">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
           <End Role="AnswerVariants" Type="Self.AnswerVariants" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TestsInfo">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AnswerVariants">
-              <PropertyRef Name="TestId" />
+              <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -65,18 +75,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Results__TestId__03F0984C">
+          <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Results__UserId__02FC7413">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ExamModelStoreContainer">
           <EntitySet Name="AnswerVariants" EntityType="Self.AnswerVariants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestsInfo" EntityType="Self.TestsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="Self.FK__AnswerWar__TestI__59063A47">
-            <End Role="TestsInfo" EntitySet="TestsInfo" />
+          <AssociationSet Name="FK__AnswerVar__Quest__6E01572D" Association="Self.FK__AnswerVar__Quest__6E01572D">
+            <End Role="Questions" EntitySet="Questions" />
             <End Role="AnswerVariants" EntitySet="AnswerVariants" />
           </AssociationSet>
           <AssociationSet Name="FK__Questions__TestI__5165187F" Association="Self.FK__Questions__TestI__5165187F">
             <End Role="TestsInfo" EntitySet="TestsInfo" />
             <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Results__TestId__03F0984C" Association="Self.FK__Results__TestId__03F0984C">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Results__UserId__02FC7413" Association="Self.FK__Results__UserId__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Results" EntitySet="Results" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -90,8 +133,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Variant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsAnswer" Type="Boolean" Nullable="false" />
-          <Property Name="TestId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TestsInfo" Relationship="Self.FK__AnswerWar__TestI__59063A47" FromRole="AnswerVariants" ToRole="TestsInfo" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK__AnswerVar__Quest__6E01572D" FromRole="AnswerVariants" ToRole="Questions" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -101,8 +144,9 @@
           <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TestId" Type="Int32" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="TestsInfo" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
           <Property Name="Weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnswerVariants" Relationship="Self.FK__AnswerVar__Quest__6E01572D" FromRole="Questions" ToRole="AnswerVariants" />
+          <NavigationProperty Name="TestsInfo" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
         </EntityType>
         <EntityType Name="TestsInfo">
           <Key>
@@ -111,8 +155,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Attempts" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AnswerVariants" Relationship="Self.FK__AnswerWar__TestI__59063A47" FromRole="TestsInfo" ToRole="AnswerVariants" />
           <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="TestsInfo" ToRole="Questions" />
+          <NavigationProperty Name="Results" Relationship="ExamModel.FK__Results__TestId__03F0984C" FromRole="TestsInfo" ToRole="Results" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -122,16 +166,17 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="ExamModel.FK__Results__UserId__02FC7413" FromRole="Users" ToRole="Results" />
         </EntityType>
-        <Association Name="FK__AnswerWar__TestI__59063A47">
-          <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+        <Association Name="FK__AnswerVar__Quest__6E01572D">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
           <End Role="AnswerVariants" Type="Self.AnswerVariants" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TestsInfo">
+            <Principal Role="Questions">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AnswerVariants">
-              <PropertyRef Name="TestId" />
+              <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -152,15 +197,60 @@
           <EntitySet Name="Questions" EntityType="Self.Questions" />
           <EntitySet Name="TestsInfo" EntityType="Self.TestsInfo" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="Self.FK__AnswerWar__TestI__59063A47">
-            <End Role="TestsInfo" EntitySet="TestsInfo" />
+          <AssociationSet Name="FK__AnswerVar__Quest__6E01572D" Association="Self.FK__AnswerVar__Quest__6E01572D">
+            <End Role="Questions" EntitySet="Questions" />
             <End Role="AnswerVariants" EntitySet="AnswerVariants" />
           </AssociationSet>
           <AssociationSet Name="FK__Questions__TestI__5165187F" Association="Self.FK__Questions__TestI__5165187F">
             <End Role="TestsInfo" EntitySet="TestsInfo" />
             <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
+          <EntitySet Name="Results" EntityType="ExamModel.Results" />
+          <AssociationSet Name="FK__Results__TestId__03F0984C" Association="ExamModel.FK__Results__TestId__03F0984C">
+            <End Role="TestsInfo" EntitySet="TestsInfo" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Results__UserId__02FC7413" Association="ExamModel.FK__Results__UserId__02FC7413">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <Property Name="Attemptsleft" Type="Int32" />
+          <NavigationProperty Name="TestsInfo" Relationship="ExamModel.FK__Results__TestId__03F0984C" FromRole="Results" ToRole="TestsInfo" />
+          <NavigationProperty Name="Users" Relationship="ExamModel.FK__Results__UserId__02FC7413" FromRole="Results" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK__Results__TestId__03F0984C">
+          <End Type="ExamModel.TestsInfo" Role="TestsInfo" Multiplicity="1" />
+          <End Type="ExamModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Results__UserId__02FC7413">
+          <End Type="ExamModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ExamModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -173,18 +263,18 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Variant" ColumnName="Variant" />
                 <ScalarProperty Name="IsAnswer" ColumnName="IsAnswer" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="ExamModel.Questions">
               <MappingFragment StoreEntitySet="Questions">
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="TestId" ColumnName="TestId" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -204,6 +294,17 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="ExamModel.Results">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="Attemptsleft" ColumnName="Attemptsleft" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

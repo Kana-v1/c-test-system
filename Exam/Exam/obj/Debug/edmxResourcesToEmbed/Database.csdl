@@ -7,8 +7,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Variant" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IsAnswer" Type="Boolean" Nullable="false" />
-    <Property Name="TestId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="TestsInfo" Relationship="Self.FK__AnswerWar__TestI__59063A47" FromRole="AnswerVariants" ToRole="TestsInfo" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Questions" Relationship="ExamModel.FK__AnswerVar__Quest__6E01572D" FromRole="AnswerVariants" ToRole="Questions" />
   </EntityType>
   <EntityType Name="Questions">
     <Key>
@@ -20,6 +20,7 @@
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="TestsInfo" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="Questions" ToRole="TestsInfo" />
     <Property Name="Weight" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AnswerVariants" Relationship="ExamModel.FK__AnswerVar__Quest__6E01572D" FromRole="Questions" ToRole="AnswerVariants" />
   </EntityType>
   <EntityType Name="TestsInfo">
     <Key>
@@ -28,7 +29,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Attempts" Type="Int32" Nullable="false" />
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AnswerVariants" Relationship="Self.FK__AnswerWar__TestI__59063A47" FromRole="TestsInfo" ToRole="AnswerVariants" />
     <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__TestI__5165187F" FromRole="TestsInfo" ToRole="Questions" />
   </EntityType>
   <EntityType Name="Users">
@@ -77,5 +77,21 @@
       <End Role="TestsInfo" EntitySet="TestsInfo" />
       <End Role="Questions" EntitySet="Questions" />
     </AssociationSet>
+    <AssociationSet Name="FK__AnswerVar__Quest__6E01572D" Association="ExamModel.FK__AnswerVar__Quest__6E01572D">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="AnswerVariants" EntitySet="AnswerVariants" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__AnswerVar__Quest__6E01572D">
+    <End Type="ExamModel.Questions" Role="Questions" Multiplicity="1" />
+    <End Type="ExamModel.AnswerVariants" Role="AnswerVariants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AnswerVariants">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

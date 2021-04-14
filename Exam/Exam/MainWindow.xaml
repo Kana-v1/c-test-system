@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Exam"
         mc:Ignorable="d"
         Title="MainWindow" Height="272.333" Width="260.665" ResizeMode="NoResize"
-        
+        WindowStartupLocation="CenterScreen"
         
         >
     

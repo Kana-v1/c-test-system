@@ -4,10 +4,10 @@
     <EntitySetMapping Name="AnswerVariants">
       <EntityTypeMapping TypeName="ExamModel.AnswerVariants">
         <MappingFragment StoreEntitySet="AnswerVariants">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Variant" ColumnName="Variant" />
           <ScalarProperty Name="IsAnswer" ColumnName="IsAnswer" />
-          <ScalarProperty Name="TestId" ColumnName="TestId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

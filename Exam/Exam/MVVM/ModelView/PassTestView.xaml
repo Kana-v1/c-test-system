@@ -12,7 +12,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
+
 
 
         <ComboBox Width="250"
@@ -27,7 +27,7 @@
                 Enter test which u want to pass
             </ComboBox.ToolTip>
         </ComboBox>
-        
+
         <TextBox x:Name="TestTitleTb"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -42,20 +42,20 @@
         </TextBox>
 
         <Button x:Name="StartTestBtn"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
                 Content="Start test"
                 Style="{StaticResource ButtonTheme}"
-                Height="45"
-                Width="120" Click="StartTestBtn_Click"/>
+                Height="46"
+                Width="120" Click="StartTestBtn_Click" Margin="0,0,0,2"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
-            
+
+
             <StackPanel Name ="StackPanelWithCB">
                 <CheckBox Content=""
                                   Height="40"
@@ -65,7 +65,7 @@
                                   Style="{StaticResource CheckBoxTheme}"
                                   Name ="FirstVariantInChB"
                                   Foreground="White"
-                                  >                  
+                                  >
                 </CheckBox>
 
                 <CheckBox Content=""
@@ -75,7 +75,7 @@
                                   HorizontalAlignment="Stretch"
                                   Style="{StaticResource CheckBoxTheme}"
                                   Name ="SecondVariantInChB"
-                                  Foreground="White">                   
+                                  Foreground="White">
                 </CheckBox>
 
                 <CheckBox Content=""
@@ -85,7 +85,7 @@
                                   HorizontalAlignment="Stretch"
                                   Style="{StaticResource CheckBoxTheme}"
                                   Name ="ThirdVariantInChB"
-                                  Foreground="White">                   
+                                  Foreground="White">
                 </CheckBox>
 
                 <CheckBox Content=""
@@ -95,7 +95,7 @@
                                   HorizontalAlignment="Stretch"
                                   Style="{StaticResource CheckBoxTheme}"
                                   Name ="FourthVariantInChB"
-                                  Foreground="White">                    
+                                  Foreground="White">
                 </CheckBox>
             </StackPanel>
 
@@ -104,15 +104,27 @@
                     <RowDefinition/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                
+
+
                 <TextBox Height="40"
                          VerticalAlignment="Top"
                          Margin="10"
                          Style="{StaticResource EmptyTextBox}"
-                         x:Name="QuestionTb"></TextBox>
-                
+                         x:Name="QuestionTb"
+                         Visibility="Hidden"
+                         IsEnabled="false"></TextBox>
+
+                <TextBox Height="40"
+                    VerticalAlignment="Top"
+                    Margin="10,61,10,10"
+                    Style="{StaticResource EmptyTextBox}"
+                    x:Name="QuestiobVariantsInfoTb"
+                    Visibility="Hidden"/>
+
+
+
                 <Image x:Name="QuestionImage"
-                       Margin="10,68,10,10"/>
+                       Margin="10,106,10,10"/>
 
                 <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
@@ -121,8 +133,15 @@
                             Height="40"
                             Width="140"
                             Style="{StaticResource NewQuestionTheme}"
-                            Content="Finish test"/>
+                            Content="Finish test" Click="FinishTestBtn_Click"/>
+                    <Button x:Name="NextQuestionBtn"
+                            Margin="20, 5, 5, 5"
+                            Height="40"
+                            Width="140"
+                            Style="{StaticResource NewQuestionTheme}"
+                            Content="Next question" Click="NextQuestionBtn_Click"/>
                 </StackPanel>
+
             </Grid>
         </Grid>
 

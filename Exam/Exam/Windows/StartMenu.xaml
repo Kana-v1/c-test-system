@@ -9,6 +9,7 @@
         Title="StartMenu" Height="600" Width="920"
         WindowStyle="None"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="true">
    
@@ -39,14 +40,14 @@
                               Foreground ="White"
                               FontSize ="20"
                               Style="{StaticResource MainMenuButtonTheme}"
-                             Name="PassTestRb"/>
+                             Name="PassTestRb" Checked="PassTestRb_Checked"/>
 
                 <RadioButton Content ="Add new test"
                              Height="50"
                               Foreground ="White"
                               FontSize ="20"
                               Style="{StaticResource MainMenuButtonTheme}"
-                             Name ="NewTestRb"
+                             Name ="NewTestRb" Checked="NewTestRb_Checked"
                             />
 
                 <RadioButton Content ="Log out"
@@ -61,7 +62,7 @@
 
             <ContentControl Grid.Column="1"
                             Margin="10"
-                            Content="{Binding CurrentView}"/>
+                            x:Name="ContentControl"/>
 
 
            

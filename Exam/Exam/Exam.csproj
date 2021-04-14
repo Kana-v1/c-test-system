@@ -68,24 +68,24 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AnswerVariants.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="Database.Context.cs">
+    <Compile Include="ExamDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.Context.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs">
+    <Compile Include="ExamDatabase.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database.Designer.cs">
+    <Compile Include="ExamDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Database.edmx</DependentUpon>
+      <DependentUpon>ExamDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ModelClass\MainViewModelClass.cs" />
     <Compile Include="MVVM\ModelClass\NewTestModelClass.cs" />
@@ -97,13 +97,16 @@
       <DependentUpon>PassTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Questions.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Results.cs">
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="TestsInfo.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>ExamDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Windows\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
@@ -204,12 +207,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database.edmx">
+    <EntityDeploy Include="ExamDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+      <LastGenOutput>ExamDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database.edmx.diagram">
-      <DependentUpon>Database.edmx</DependentUpon>
+    <None Include="ExamDatabase.edmx.diagram">
+      <DependentUpon>ExamDatabase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -227,15 +230,15 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database.Context.tt">
+    <Content Include="ExamDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
+      <DependentUpon>ExamDatabase.edmx</DependentUpon>
+      <LastGenOutput>ExamDatabase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database.tt">
+    <Content Include="ExamDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.cs</LastGenOutput>
+      <DependentUpon>ExamDatabase.edmx</DependentUpon>
+      <LastGenOutput>ExamDatabase.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

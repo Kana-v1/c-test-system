@@ -12,13 +12,15 @@ namespace Exam
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerVariants
+    public partial class Results
     {
         public int Id { get; set; }
-        public string Variant { get; set; }
-        public bool IsAnswer { get; set; }
-        public int QuestionId { get; set; }
+        public int UserId { get; set; }
+        public int TestId { get; set; }
+        public int Mark { get; set; }
+        public Nullable<int> Attemptsleft { get; set; }
     
-        public virtual Questions Questions { get; set; }
+        public virtual TestsInfo TestsInfo { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

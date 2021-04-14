@@ -244,6 +244,7 @@
                                 Content="Finish creating test"
                                 Margin="0, 50, 0, 0" 
                              x:Name="FinishCreatingTestBtn"
+                             Visibility="Hidden"
                              Style="{StaticResource NewQuestionTheme}" Click="FinishCreatingTestBtn_Click" 
                            />
 

@@ -37,6 +37,7 @@ namespace Exam
 
         public async void LogInBtn_Click(object sender, RoutedEventArgs e)
         {
+            _instance.LogInBtn.IsEnabled = false;
 
             string log = _instance.LogTb.Text;
             string password = _instance.PasswordTb.Password;
@@ -53,10 +54,12 @@ namespace Exam
 
                 Authenticated = true;
 
+
                 _instance.AfterLogging();//continue executing main form
             }
             else
             {
+                _instance.LogInBtn.IsEnabled = false;
                 MessageBox.Show("Incorrect log or password");
             }
 

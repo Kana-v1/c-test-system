@@ -14,12 +14,20 @@ namespace Exam
     
     public partial class Questions
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Questions()
+        {
+            this.AnswerVariants = new HashSet<AnswerVariants>();
+        }
+    
         public int Id { get; set; }
         public string Question { get; set; }
         public int TestId { get; set; }
         public byte[] Image { get; set; }
         public int Weight { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnswerVariants> AnswerVariants { get; set; }
         public virtual TestsInfo TestsInfo { get; set; }
     }
 }

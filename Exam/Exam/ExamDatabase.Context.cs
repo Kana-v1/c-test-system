@@ -29,5 +29,6 @@ namespace Exam
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<TestsInfo> TestsInfo { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Results> Results { get; set; }
     }
 }

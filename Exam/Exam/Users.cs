@@ -14,9 +14,18 @@ namespace Exam
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Results = new HashSet<Results>();
+        }
+    
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Results> Results { get; set; }
     }
 }

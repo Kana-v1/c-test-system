@@ -15,16 +15,21 @@ namespace Exam.MVVM.ModelView
     /// </summary>
     public partial class AddingTestWindow : UserControl
     {
-      
+
 
         private int _attempts = 0;
         private string _testTitle = string.Empty;
         private int _newTestId;
-        Questions _question = new Questions();
+        Questions _question;
 
         public AddingTestWindow()
         {
-            InitializeComponent();          
+            InitializeComponent();
+
+            foreach (var cb in StackPanelWithCB.Children.OfType<CheckBox>())
+            {
+                cb.IsEnabled = false;
+            }
         }
 
 
@@ -34,34 +39,34 @@ namespace Exam.MVVM.ModelView
             using (ExamDatabase ed = new ExamDatabase())
             {
                 if (ed.TestsInfo.Where(x => x.Title == TestNameTb.Text).FirstOrDefault() != null)
-            {
-                MessageBox.Show("Test's title have to be unique", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (String.IsNullOrEmpty(TestNameTb.Text))
-            {
-                MessageBox.Show("Test's title must not be empty", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                {
+                    MessageBox.Show("Test's title have to be unique", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (String.IsNullOrEmpty(TestNameTb.Text))
+                {
+                    MessageBox.Show("Test's title must not be empty", "Incorrect test's title", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
 
-            if (!Int32.TryParse(TestAttempts.Text, out _attempts) || _attempts <= 0 || _attempts > 100)
-            {
-                MessageBox.Show("Incorrect attempts");
-                return;
-            }
+                if (!Int32.TryParse(TestAttempts.Text, out _attempts) || _attempts <= 0 || _attempts > 100)
+                {
+                    MessageBox.Show("Incorrect attempts");
+                    return;
+                }
 
-            string _testTitle = TestNameTb.Text;
+                string _testTitle = TestNameTb.Text;
 
-            NewTestBtn.Visibility = Visibility.Hidden;
-            TestAttempts.Visibility = Visibility.Hidden;
-            TestNameTb.Visibility = Visibility.Hidden;
+                NewTestBtn.Visibility = Visibility.Hidden;
+                TestAttempts.Visibility = Visibility.Hidden;
+                TestNameTb.Visibility = Visibility.Hidden;
 
 
-            OneQOneAns.Visibility = Visibility.Visible;
-            OneQRb.Visibility = Visibility.Visible;
+                OneQOneAns.Visibility = Visibility.Visible;
+                OneQRb.Visibility = Visibility.Visible;
+                FinishCreatingTestBtn.Visibility = Visibility.Visible;
 
-            
                 TestsInfo ti = new TestsInfo() { Title = _testTitle, Attempts = _attempts };
                 ed.TestsInfo.Add(ti);
                 ed.SaveChanges();
@@ -79,28 +84,55 @@ namespace Exam.MVVM.ModelView
         private void FirstAnswerVariant_TextChanged(object sender, TextChangedEventArgs e)
         {
             FirstVariantInChB.Content = FirstAnswerVariant.Text;
+            FirstVariantInChB.IsEnabled = true;
         }
 
         private void SecondAnswerVariant_TextChanged(object sender, TextChangedEventArgs e)
         {
             SecondVariantInChB.Content = SecondAnswerVariant.Text;
+            SecondVariantInChB.IsEnabled = true;
+
+            if (String.IsNullOrEmpty(SecondVariantInChB.Content.ToString()))
+            {
+                SecondVariantInChB.IsEnabled = false;
+            }
         }
 
         private void ThirdAnswerVariant_TextChanged(object sender, TextChangedEventArgs e)
         {
             ThirdVariantInChB.Content = ThirdAnswerVariant.Text;
+            ThirdVariantInChB.IsEnabled = true;
+
+            if (String.IsNullOrEmpty(ThirdVariantInChB.Content.ToString()))
+            {
+                ThirdVariantInChB.IsEnabled = false;
+            }
         }
 
         private void FourthAnswerVariant_TextChanged(object sender, TextChangedEventArgs e)
         {
             FourthVariantInChB.Content = FourthAnswerVariant.Text;
+            FourthVariantInChB.IsEnabled = true;
+
+            if (String.IsNullOrEmpty(FourthVariantInChB.Content.ToString()))
+            {
+                FourthVariantInChB.IsEnabled = false;
+            }
         }
 
         private void FifthAnswerVariant_TextChanged(object sender, TextChangedEventArgs e)
         {
             FifthVariantInChB.Content = FifthAnswerVariant.Text;
+            FifthVariantInChB.IsEnabled = true;
+
+            if (String.IsNullOrEmpty(FifthVariantInChB.Content.ToString()))
+            {
+                FifthVariantInChB.IsEnabled = false;
+            }
         }
         #endregion
+
+
 
         //REGION
         #region Adding picture
@@ -113,7 +145,7 @@ namespace Exam.MVVM.ModelView
                 imageForQuestion.Source = new BitmapImage(fileUri);
             }
 
-            _question.Image = ConvertPicToByte(imageForQuestion.Source as BitmapImage); //load image to database
+
         }
         private byte[] ConvertPicToByte(BitmapImage img)
         {
@@ -125,13 +157,21 @@ namespace Exam.MVVM.ModelView
                 return ms.ToArray();
             }
         }
-        
+
         #endregion
         private void NewQuestionBtn(object sender, RoutedEventArgs e)
         {
+            if (String.IsNullOrEmpty(QuestionTb.Text))
+            {
+                MessageBox.Show("Enter question", "Question", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            _question = new Questions();
+
             using (ExamDatabase ed = new ExamDatabase())
             {
-               
+
 
                 int weight = 0;
 
@@ -143,7 +183,7 @@ namespace Exam.MVVM.ModelView
 
                 //REGION
                 #region Question field check
-               
+
                 if (String.IsNullOrEmpty(QuestionTb.Text))
                 {
                     MessageBox.Show("Question's field must not be empty", "Incorrect question's field", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -155,6 +195,9 @@ namespace Exam.MVVM.ModelView
                 _question.Question = QuestionTb.Text;
                 _question.TestId = _newTestId;
 
+                if (!(imageForQuestion.Source is null))
+                    _question.Image = ConvertPicToByte(imageForQuestion.Source as BitmapImage); //load image to database
+
                 ed.Questions.Add(_question);
 
                 List<AnswerVariants> avList = new List<AnswerVariants>();
@@ -162,13 +205,14 @@ namespace Exam.MVVM.ModelView
                 int answersCount = 0;
                 foreach (var tb in StackPanelWithCB.Children.OfType<CheckBox>().Where(x => !String.IsNullOrEmpty(x.Content.ToString())))
                 {
-                    answersCount++;
+                    if (tb.IsChecked == true)
+                        answersCount++;
 
                     avList.Add(new AnswerVariants()
                     {
                         Variant = tb.Content.ToString(),
                         IsAnswer = (bool)tb.IsChecked,
-                        TestId = _newTestId
+                        QuestionId = _question.Id
                     });
                 }
 
@@ -199,6 +243,9 @@ namespace Exam.MVVM.ModelView
                     ed.AnswerVariants.Add(answers);
                 }
                 ed.SaveChanges();
+
+
+                MessageBox.Show("Question has been added", "Question", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
 
                 MakeAllFieldsEmpty();
             }
@@ -244,10 +291,11 @@ namespace Exam.MVVM.ModelView
 
         private void FinishCreatingTestBtn_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show($"Test{_testTitle} has been added", "Test", MessageBoxButton.OK, MessageBoxImage.Information);
             StartMenu instance = Application.Current.Windows.OfType<StartMenu>().FirstOrDefault();
-            StartMenu new_instance = new StartMenu();
-            new_instance.Show();
+            StartMenu new_instance = new StartMenu(instance.UA);
             instance.Close();
+            new_instance.Show();
         }
     }
 }

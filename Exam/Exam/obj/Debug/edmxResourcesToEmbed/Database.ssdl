@@ -7,7 +7,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Variant" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IsAnswer" Type="bit" Nullable="false" />
-    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Questions">
     <Key>
@@ -36,15 +36,15 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
   </EntityType>
-  <Association Name="FK__AnswerWar__TestI__59063A47">
-    <End Role="TestsInfo" Type="Self.TestsInfo" Multiplicity="1" />
+  <Association Name="FK__AnswerVar__Quest__6E01572D">
+    <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
     <End Role="AnswerVariants" Type="Self.AnswerVariants" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TestsInfo">
+      <Principal Role="Questions">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AnswerVariants">
-        <PropertyRef Name="TestId" />
+        <PropertyRef Name="QuestionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -65,8 +65,8 @@
     <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestsInfo" EntityType="Self.TestsInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__AnswerWar__TestI__59063A47" Association="Self.FK__AnswerWar__TestI__59063A47">
-      <End Role="TestsInfo" EntitySet="TestsInfo" />
+    <AssociationSet Name="FK__AnswerVar__Quest__6E01572D" Association="Self.FK__AnswerVar__Quest__6E01572D">
+      <End Role="Questions" EntitySet="Questions" />
       <End Role="AnswerVariants" EntitySet="AnswerVariants" />
     </AssociationSet>
     <AssociationSet Name="FK__Questions__TestI__5165187F" Association="Self.FK__Questions__TestI__5165187F">
