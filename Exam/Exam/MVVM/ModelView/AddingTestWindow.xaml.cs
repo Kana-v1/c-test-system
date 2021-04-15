@@ -20,7 +20,7 @@ namespace Exam.MVVM.ModelView
         private int _attempts = 0;
         private string _testTitle = string.Empty;
         private int _newTestId;
-        Questions _question;
+        private Questions _question;
 
         public AddingTestWindow()
         {

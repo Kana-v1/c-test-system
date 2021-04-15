@@ -21,14 +21,14 @@ namespace Exam.MVVM.ModelView
     /// </summary>
     public partial class PassTestView : UserControl
     {
-        long _maxMark = 0;
-        double _currentMark = 0;
-        List<Questions> _questions; //LINQ can't recognize _question[num] 
-        Questions _question;
-        int _countForQuestion = 0;
-        int _trueVariantsCount = 0;
-        int _userId = 0;
-        int _testId = 0;
+        private long _maxMark = 0;
+        private double _currentMark = 0;
+        private List<Questions> _questions; //LINQ can't recognize _question[num] 
+        private Questions _question;
+        private int _countForQuestion = 0;
+        private int _trueVariantsCount = 0;
+        private int _userId = 0;
+        private int _testId = 0;
 
         private string _user;
 

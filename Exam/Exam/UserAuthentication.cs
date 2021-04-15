@@ -70,13 +70,16 @@ namespace Exam
 
             var provider = new SHA1CryptoServiceProvider();
             byte[] bytes = Encoding.UTF8.GetBytes(checkPassword);
-            string hashedPassword = Convert.ToBase64String(provider.ComputeHash(bytes));
+            string hashedPasswordFromForm = Convert.ToBase64String(provider.ComputeHash(bytes));
 
             using (ExamDatabase tsd = new ExamDatabase())
             {
                 var user = tsd.Users.FirstOrDefault(u => u.Login == checkLogin);
 
-                if (user != null && user.Password == hashedPassword)
+                bytes = Encoding.UTF8.GetBytes(user.Password);
+                string hashedPassworfFromDb = Convert.ToBase64String(provider.ComputeHash(bytes));
+
+                if (user != null && hashedPassworfFromDb == hashedPasswordFromForm)
                 {
                     IsAdmin = user.IsAdmin;
                     check = true;
@@ -94,13 +97,13 @@ namespace Exam
         public void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            var provider = new SHA1CryptoServiceProvider();
-            byte[] bytes = Encoding.UTF8.GetBytes(_instance.PasswordTb.Password);
-            string hashedPassword = Convert.ToBase64String(provider.ComputeHash(bytes));
+            //var provider = new SHA1CryptoServiceProvider();
+            //byte[] bytes = Encoding.UTF8.GetBytes(_instance.PasswordTb.Password);
+            //string hashedPassword = Convert.ToBase64String(provider.ComputeHash(bytes));
 
             try
             {
-                Users user = new Users() { Login = _instance.LogTb.Text, Password = hashedPassword };
+                Users user = new Users() { Login = _instance.LogTb.Text, Password = _instance.PasswordTb.Password };
                 using (ExamDatabase ud = new ExamDatabase())
                 {
                     ud.Users.Add(user);
